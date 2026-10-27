@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
+#include<stdlib.h>
+#include<stdio.h>
+#include <limits.h>
 
 int	ft_atoi(const char *str)
 {
@@ -17,6 +20,8 @@ int	ft_atoi(const char *str)
 	int		sign;
 	long	result;
 
+	
+	
 	i = 0;
 	sign = 1;
 	result = 0;
@@ -30,8 +35,18 @@ int	ft_atoi(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
+		if (result > (LONG_MAX - (str[i] - '0')) / 10)
+			return (sign == -1 ? 0 : -1);
+
 		result = (result * 10) + (str[i] - '0');
 		i++;
 	}
 	return ((int)(result * sign));
+}
+
+int main()
+{
+	printf("%d",ft_atoi("92233720"));
+	printf("\n");
+	printf("%d",atoi("9223372\n"));
 }
